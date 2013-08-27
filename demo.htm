@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head><title>Animations by Anim</title>
+<script src="https://raw.github.com/relay/anim/master/anim.min.js"></script>
+<script>function byId(s) {return document.getElementById(s)}</script>
+<style>
+body {margin:1%; padding:0; background:#fff; white-space:nowrap}
+table, td, th, tr {margin:0; padding:0; border:0; border-collapse:collapse}
+td {width:50%; padding:6px 3px; vertical-align:middle; border:1px solid #eee}
+textarea {height:100px; width:98%; font-size:9pt}
+.sect div {padding:2px; background:#dd5; border:1px solid #aa0; margin:2px}
+td {width:50%}
+</style>
+</head>
+<body>
+<h3>demo of anim features:</h3>
+<table cellspacing=0 style="width:100%; margin:0 auto; max-width:980px">
+  <tr>
+    <th>Result</th>
+    <th>Code</th>
+  </tr>
+  <tr>
+    <td class="sect">
+      <div id=a1 style="width:0">ease&nbsp;in</div>
+      <div id=a2 style="width:0">ease&nbsp;out</div>
+      <div id=a3 style="width:0">ease</div>
+      <div id=a4 style="width:0">linear</div>
+    </td><td>
+      <textarea id=at readonly>
+anim("a1", {width:"90%"}, 3, "ease-in").anim(1).anim("a1", {width:0}, 1, "ease-in");
+anim("a2", {width:"90%"}, 3, "ease-out").anim(1).anim("a2", {width:0}, 1, "ease-out");
+anim("a3", {width:"90%"}, 3, "ease").anim(1).anim("a3", {width:0}, 1, "ease").anim(1);
+anim("a4", {width:"90%"}, 3, "lin").anim(1).anim("a4", {width:0}, 1, "lin").anim(1).anim(goA);
+      </textarea>
+    <script>function goA() { eval(byId("at").value) } goA();</script>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect" style="height:180px">
+      <div id=b1 style="width:60px; height:60px"> </div>
+    </td><td>
+      <textarea id=bt readonly>
+anim(1)
+.anim("b1", {width:"150px", height:"150px"}, 0.5).anim(0.5)
+.anim("b1", {width:{to:"60px", e:"ease-in"}, height:"60px"}, 0.5).anim(0.5)
+.anim(goB);
+      </textarea>
+    <script>function goB() { eval(byId("bt").value) } goB();</script>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect">
+      <div id=c1 style="width:60px; height:60px; position:relative"> </div>
+    </td><td>
+      <textarea id=ct readonly>
+anim("c1", {borderRadius:"30px", left:"50%"}, 1.5, "ease-out")
+.anim(0.1)
+.anim("c1", {borderRadius:0, left:0}, 1.5, "ease-in")
+.anim(1)
+.anim(goC);
+      </textarea>
+    <script>function goC() { eval(byId("ct").value) } goC();</script>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect">
+      <div id=d1 style="padding:1em; display:inline; font-family:courier; border:1px solid #faa; background-color:#fff">RED</div>
+    </td><td>
+      <textarea id=dt readonly>
+anim("d1", {backgroundColor:"#f66", border:10}, 1).anim(function(){ byId("d1").innerHTML="GRN"})
+.anim("d1", {backgroundColor:"#6f6", border:0}, 1).anim(function(){ byId("d1").innerHTML="BLU"})
+.anim("d1", {backgroundColor:"#66f", borderLeftWidth:10, borderTopWidth:3, borderRightWidth:10, borderBottomWidth:3}, 1).anim(function(){ byId("d1").innerHTML="RED"})
+.anim(goD);
+      </textarea>
+    <script>function goD() { eval(byId("dt").value) } goD();</script>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect">
+      <div id=e1 style="padding:3px; font-size:12pt">font size</div>
+    </td><td>
+      <textarea id=et readonly>
+anim("e1", {fontSize:{fr:"12pt", to:30}, opacity:0.4}, 1)
+.anim("e1", {fontSize:{fr:"30pt", to:12}, opacity:1}, 1)
+.anim(goE);
+      </textarea>
+    <script>function goE() { eval(byId("et").value) } goE();</script>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect" style="vertical-align:top">
+      <div id=f1 style="padding:0px; overflow:hidden; height:1px">the quick brown<br>fox jumped over<br>the lazy dog</div>
+    </td><td>
+      <textarea id=ft readonly>
+var node = byId("f1");
+node.style.height = "auto";
+var newHeight = node.offsetHeight;
+node.style.height = "1px";
+
+anim("f1", {height: newHeight}, 0.5)
+.anim(1)
+.anim("f1", {height:0}, 0.5)
+.anim(1)
+.anim(goF);
+      </textarea>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="sect" style="height:180px">
+      <div id=g1 style="width:100px">hover</div>
+      <div id=g2 style="width:100px">hover</div>
+      <div id=g3 style="width:100px">hover</div>
+    </td><td>
+      <textarea id=gt readonly>
+byId("g1").onmouseover = function(){ anim("g1", {width:"300px"}, 1) }
+byId("g1").onmouseout = function(){ anim("g1", {width:"100px"}, 0.3) }
+byId("g2").onmouseover = function(){ anim("g2", {width:"300px"}, 1) }
+byId("g2").onmouseout = function(){ anim("g2", {width:"100px"}, 0.3) }
+byId("g3").onmouseover = function(){ anim("g3", {width:"300px"}, 1) }
+byId("g3").onmouseout = function(){ anim("g3", {width:"100px"}, 0.3) }
+      </textarea>
+    <script>function goG() { eval(byId("gt").value) } goG();</script>
+    </td>
+  </tr>
+
+</table>
+    <script>//move outside table because of offsetHeight
+    function goF() { eval(byId("ft").value) } goF();
+    </script>
+
+<a href="http://github.com/relay/anim/">&lt; Back to Anim Library</a>
+</body>
+</html>
